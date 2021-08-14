@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import useControls from '../hooks/useControls';
+import Follower from './Follower';
 
 export default function Player({ position, args, color }) {
   const player = useRef();
@@ -16,9 +17,12 @@ export default function Player({ position, args, color }) {
   });
 
   return (
-    <mesh castShadow position={position} ref={player}>
-      <boxGeometry args={args} />
-      <meshStandardMaterial color={color} />
-    </mesh>
+    <group>
+      <mesh castShadow position={position} ref={player}>
+        <boxGeometry args={args} />
+        <meshStandardMaterial color={color} />
+      </mesh>
+      <Follower player={player} />
+    </group>
   );
 }

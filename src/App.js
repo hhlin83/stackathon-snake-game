@@ -23,8 +23,8 @@ function App() {
           castShadow
           position={[0, 10, 0]}
           intensity={1.5}
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
+          // shadow-mapSize-width={1024}
+          // shadow-mapSize-height={1024}
           shadow-camera-far={500}
           shadow-camera-left={-50}
           shadow-camera-right={50}
@@ -34,7 +34,7 @@ function App() {
         <pointLight position={[-10, 0, -20]} intensity={0.5} />
         <pointLight position={[0, -10, 0]} intensity={1.5} />
         <Floor position={[0, -1, 0]} />
-        <Player position={[0, 1, 0]} color="lightblue" args={[1, 1, 1]} />
+        <Player position={[0, 0, 0]} color="lightblue" args={[1, 1, 1]} />
       </Canvas>
     </div>
   );
