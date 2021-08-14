@@ -3,11 +3,11 @@ import { useFrame } from '@react-three/fiber';
 import { Vector3 } from 'three';
 import useControls from '../hooks/useControls';
 
-export default function Box({ position, args, color }) {
+export default function Player({ position, args, color }) {
   const player = useRef();
+  const { moveLeft, moveRight } = useControls();
   const moveSpeed = 2;
   const turnSpeed = 5;
-  const { moveLeft, moveRight } = useControls();
 
   useFrame((state, delta) => {
     const direction = (moveLeft ? 1 : 0) + (moveRight ? -1 : 0);

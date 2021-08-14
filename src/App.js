@@ -1,11 +1,11 @@
 // Import modules
 import { Canvas } from '@react-three/fiber';
-import { softShadows, OrbitControls } from '@react-three/drei';
+import { /* softShadows, */ OrbitControls } from '@react-three/drei';
 
 // Import components
 import './App.css';
 import Floor from './components/Floor';
-import Box from './components/Box';
+import Player from './components/Player';
 
 // softShadows();
 
@@ -19,11 +19,22 @@ function App() {
       >
         <OrbitControls />
         <ambientLight intensity={0.3} />
-        <directionalLight castShadow position={[0, 10, 0]} intensity={1.5} />
+        <directionalLight
+          castShadow
+          position={[0, 10, 0]}
+          intensity={1.5}
+          // shadow-mapSize-width={1024}
+          // shadow-mapSize-height={1024}
+          // shadow-camera-far={500}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
+        />
         <pointLight position={[-10, 0, -20]} intensity={0.5} />
         <pointLight position={[0, -10, 0]} intensity={1.5} />
         <Floor position={[0, -1, 0]} />
-        <Box position={[0, 1, 0]} color="lightblue" args={[1, 1, 1]} />
+        <Player position={[0, 1, 0]} color="lightblue" args={[1, 1, 1]} />
       </Canvas>
     </div>
   );
