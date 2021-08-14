@@ -1,47 +1,24 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { Vector3 } from 'three';
+import useControls from '../hooks/useControls';
 
 export default function Box({ position, args, color }) {
-  const mesh = useRef();
-  const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
+  const player = useRef();
+  const moveSpeed = 2;
+  const turnSpeed = 5;
+  const { moveLeft, moveRight } = useControls();
 
-  useEffect(() => {
-    console.log('rendered');
-  }, []);
-
-  useFrame(({ clock }) => {
-    mesh.current.rotation.x = Math.sin(clock.getElapsedTime());
-    mesh.current.position.x += 0.01 * clock.getElapsedTime();
+  useFrame((state, delta) => {
+    const direction = (moveLeft ? 1 : 0) + (moveRight ? -1 : 0);
+    player.current.rotation.y += turnSpeed * direction * delta;
+    player.current.translateOnAxis(new Vector3(0, 0, 1), moveSpeed * delta);
   });
 
-  console.log(mesh.current);
-  // document.addEventListener('keydown', (e) => {
-  //   e.stopImmediatePropagation();
-  //   switch (e.key) {
-  //     case 'ArrowRight':
-  //       console.log('arrow right');
-  //       console.log(mesh.current);
-  //       // mesh.current.position.x += 1;
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // });
-
   return (
-    <mesh
-      castShadow
-      position={position}
-      ref={mesh}
-      scale={active ? 1.5 : 1}
-      onClick={() => setActive(!active)}
-      onPointerOver={() => setHover(true)}
-      onPointerOut={() => setHover(false)}
-    >
+    <mesh castShadow position={position} ref={player}>
       <boxGeometry args={args} />
-      <meshStandardMaterial color={hovered ? 'pink' : color} />
+      <meshStandardMaterial color={color} />
     </mesh>
   );
 }

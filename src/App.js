@@ -15,7 +15,7 @@ function App() {
       <Canvas
         colorManagement
         shadows
-        camera={{ position: [-5, 2, 10], fov: 60 }}
+        camera={{ position: [-5, 10, 10], fov: 60 }}
       >
         <OrbitControls />
         <ambientLight intensity={0.3} />
@@ -23,7 +23,7 @@ function App() {
         <pointLight position={[-10, 0, -20]} intensity={0.5} />
         <pointLight position={[0, -10, 0]} intensity={1.5} />
         <Floor position={[0, -1, 0]} />
-        <Box position={[0, 1, 0]} color="lightblue" args={[3, 2, 1]} />
+        <Box position={[0, 1, 0]} color="lightblue" args={[1, 1, 1]} />
       </Canvas>
     </div>
   );
