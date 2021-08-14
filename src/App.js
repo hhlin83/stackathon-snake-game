@@ -5,7 +5,7 @@ import { /* softShadows, */ OrbitControls } from '@react-three/drei';
 // Import components
 import './App.css';
 import Floor from './components/Floor';
-import Player from './components/Player';
+import { Player, Follower } from './components/Player';
 
 // softShadows();
 
@@ -35,6 +35,7 @@ function App() {
         <pointLight position={[0, -10, 0]} intensity={1.5} />
         <Floor position={[0, -1, 0]} />
         <Player position={[0, 0, 0]} color="lightblue" args={[1, 1, 1]} />
+        <Follower />
       </Canvas>
     </div>
   );
