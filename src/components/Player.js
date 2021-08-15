@@ -36,29 +36,57 @@ export function Player({ position, args, color }) {
 export function Follower({ position }) {
   const follower = useRef();
   const history = [];
+  let collected = false;
+  let reachLast = false;
   let startTrack = false;
   let followerIdx = null;
 
   useEffect(() => {
-    tracks.push(follower);
-    followerIdx = tracks.length - 1;
+    // tracks.push(follower);
+    // followerIdx = tracks.length - 1;
   }, []);
 
   useFrame((state, delta) => {
-    const target = tracks[followerIdx - 1];
-    if (followerIdx !== null && target) {
-      const targetPos = target.current.position.clone();
-      history.push(targetPos);
-
-      if (!startTrack) {
-        const followerPos = follower.current.position;
-        const distance = followerPos.distanceTo(targetPos);
-        if (distance > 4) startTrack = true;
-      } else {
-        const historyPos = history.shift();
-        follower.current.lookAt(historyPos);
-        follower.current.position.set(historyPos.x, historyPos.y, historyPos.z);
+    const followerPos = follower.current.position;
+    if (!collected && tracks[0]) {
+      const playerPos = tracks[0].current.position.clone();
+      const distance = followerPos.distanceTo(playerPos);
+      if (distance < 0.5) {
+        collected = true;
+        tracks.push(follower);
+        followerIdx = tracks.length - 1;
+        console.log('collected!', tracks);
       }
+    } else {
+      const target = tracks[followerIdx - 1];
+      // if (followerIdx !== null && target) {
+      const targetPos = target.current.position.clone();
+
+      if (!reachLast) {
+        const distance = followerPos.distanceTo(targetPos);
+        if (distance < 0.5) {
+          reachLast = true;
+          console.log('reach last!');
+        }
+      } else {
+        history.push(targetPos);
+        if (!startTrack) {
+          const distance = followerPos.distanceTo(targetPos);
+          if (distance > 1) {
+            startTrack = true;
+            console.log('start tracking!');
+          }
+        } else {
+          const historyPos = history.shift();
+          follower.current.lookAt(historyPos);
+          follower.current.position.set(
+            historyPos.x,
+            historyPos.y,
+            historyPos.z
+          );
+        }
+      }
+      // }
     }
   });
 
