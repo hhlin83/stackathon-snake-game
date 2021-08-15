@@ -35,7 +35,8 @@ function App() {
         <pointLight position={[0, -10, 0]} intensity={1.5} />
         <Floor position={[0, -1, 0]} />
         <Player position={[0, 0, 0]} color="lightblue" args={[1, 1, 1]} />
-        <Follower />
+        <Follower position={[-2, 0, 0]} />
+        <Follower position={[-4, 0, 0]} />
       </Canvas>
     </div>
   );

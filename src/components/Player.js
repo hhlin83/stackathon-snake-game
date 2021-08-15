@@ -33,42 +33,37 @@ export function Player({ position, args, color }) {
   );
 }
 
-export function Follower() {
+export function Follower({ position }) {
   const follower = useRef();
   const history = [];
-  let delay = 0;
-  // const [history, setHistory] = useState([]);
+  let startTrack = false;
+  let followerIdx = null;
 
   useEffect(() => {
-    setInterval(() => {
-      if (delay <= 2) delay++;
-    }, 1000);
+    tracks.push(follower);
+    followerIdx = tracks.length - 1;
   }, []);
 
   useFrame((state, delta) => {
-    const target = tracks[0];
-    if (target) {
+    const target = tracks[followerIdx - 1];
+    if (followerIdx !== null && target) {
       const targetPos = target.current.position.clone();
-      const followerPos = follower.current.position;
       history.push(targetPos);
-      const distance = followerPos.distanceTo(targetPos);
 
-      if (delay > 2) {
-        // const followerPos = follower.current.position;
-        // const followDir = history.shift().sub(followerPos).normalize();
-        // follower.current.translateOnAxis(followDir, 2 * delta);
-
+      if (!startTrack) {
+        const followerPos = follower.current.position;
+        const distance = followerPos.distanceTo(targetPos);
+        if (distance > 4) startTrack = true;
+      } else {
         const historyPos = history.shift();
         follower.current.lookAt(historyPos);
         follower.current.position.set(historyPos.x, historyPos.y, historyPos.z);
-
-        // follower.current.rotation.y += turnSpeed * direction * delta;
       }
     }
   });
 
   return (
-    <mesh castShadow position={[0, 0, 0]} ref={follower}>
+    <mesh castShadow position={position} ref={follower}>
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="pink" />
     </mesh>
