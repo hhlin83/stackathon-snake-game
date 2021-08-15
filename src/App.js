@@ -5,7 +5,8 @@ import { /* softShadows, */ OrbitControls } from '@react-three/drei';
 // Import components
 import './App.css';
 import Floor from './components/Floor';
-import { Player, Follower } from './components/Player';
+import Player from './components/Player';
+import Follower from './components/Follower';
 
 // softShadows();
 
