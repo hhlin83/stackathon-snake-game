@@ -9,10 +9,10 @@ export default function Player({ position, args, color }) {
   const { moveLeft, moveRight } = useControls();
   const moveSpeed = 2;
   const turnSpeed = 5;
-  const { snake } = useContext(GameContext);
+  const { addToSnake } = useContext(GameContext);
 
   useEffect(() => {
-    snake.push(player);
+    addToSnake(player);
   }, []);
 
   useFrame((state, delta) => {

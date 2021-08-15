@@ -1,15 +1,22 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { GameContext } from './GameManager';
 
 export default function Follower({ position }) {
   const follower = useRef();
-  const { snake /* , addBox  */ } = useContext(GameContext);
+  const { snake, addNewBox } = useContext(GameContext);
+  // const [targetHistory, setTargetHistory] = useState([]);
+  // const [collected, setCollected] = useState(false);
+  // const [reachedLast, setReachLast] = useState(false);
+  // const [startFollow, setStartFollow] = useState(false);
+  // const [snakeIdx, setSnakeIdx] = useState(null);
   const targetHistory = [];
   let collected = false;
   let reachedLast = false;
   let startFollow = false;
   let snakeIdx = null;
+
+  console.log(snake);
 
   useFrame(() => {
     const followerPos = follower.current.position;
@@ -18,37 +25,38 @@ export default function Follower({ position }) {
       const distance = followerPos.distanceTo(playerPos);
       if (distance < 0.5) {
         collected = true;
+        // setCollected(true);
         snake.push(follower);
         snakeIdx = snake.length - 1;
+        // setSnakeIdx(snake.length - 1);
         console.log('collected!', snake);
-        // addBox();
-        // console.log('add new box');
+        addNewBox();
+        console.log('add new box', snake);
       }
     } else {
-      const target = snake[snakeIdx - 1];
-      const targetPos = target.current.position.clone();
-
-      if (!reachedLast) {
-        const distance = followerPos.distanceTo(targetPos);
-        if (distance < 0.5) {
-          reachedLast = true;
-          console.log('reach last!');
-        }
-      } else {
-        targetHistory.push(targetPos);
-        if (!startFollow) {
-          follower.current.lookAt(targetPos);
-          const distance = followerPos.distanceTo(targetPos);
-          if (distance > 1) {
-            startFollow = true;
-            console.log('start tracking!');
-          }
-        } else {
-          const historyPos = targetHistory.shift();
-          follower.current.lookAt(historyPos);
-          followerPos.copy(historyPos);
-        }
-      }
+      // const target = snake[snakeIdx - 1];
+      // const targetPos = target.current.position.clone();
+      // if (!reachedLast) {
+      //   const distance = followerPos.distanceTo(targetPos);
+      //   if (distance < 0.5) {
+      //     reachedLast = true;
+      //     console.log('reach last!');
+      //   }
+      // } else {
+      //   targetHistory.push(targetPos);
+      //   if (!startFollow) {
+      //     follower.current.lookAt(targetPos);
+      //     const distance = followerPos.distanceTo(targetPos);
+      //     if (distance > 1) {
+      //       startFollow = true;
+      //       console.log('start tracking!');
+      //     }
+      //   } else {
+      //     const historyPos = targetHistory.shift();
+      //     follower.current.lookAt(historyPos);
+      //     followerPos.copy(historyPos);
+      //   }
+      // }
     }
   });
 
