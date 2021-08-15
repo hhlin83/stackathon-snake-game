@@ -48,11 +48,7 @@ export default function Follower({ position }) {
         } else {
           const historyPos = history.shift();
           follower.current.lookAt(historyPos);
-          follower.current.position.set(
-            historyPos.x,
-            historyPos.y,
-            historyPos.z
-          );
+          follower.current.position.copy(historyPos);
         }
       }
     }
