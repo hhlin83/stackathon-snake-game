@@ -39,6 +39,7 @@ export default function Follower({ position }) {
       } else {
         history.push(targetPos);
         if (!startTrack) {
+          follower.current.lookAt(targetPos);
           const distance = followerPos.distanceTo(targetPos);
           if (distance > 1) {
             startTrack = true;
