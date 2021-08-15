@@ -1,17 +1,17 @@
 // Import modules
 import { Canvas } from '@react-three/fiber';
 import { /* softShadows, */ OrbitControls } from '@react-three/drei';
+import './App.css';
 
 // Import components
-import './App.css';
 import GameManager from './components/GameManager';
 import Floor from './components/Floor';
 import Player from './components/Player';
-import FollowerManager from './components/FollowerManager';
+import Followers from './components/Followers';
 
 // softShadows();
 
-function App() {
+export default function App() {
   return (
     <div id="canvas-container">
       <Canvas
@@ -38,11 +38,9 @@ function App() {
           <pointLight position={[0, -10, 0]} intensity={1.5} />
           <Floor position={[0, -1, 0]} />
           <Player position={[0, 0, 0]} color="lightblue" args={[1, 1, 1]} />
-          <FollowerManager />
+          <Followers />
         </GameManager>
       </Canvas>
     </div>
   );
 }
-
-export default App;

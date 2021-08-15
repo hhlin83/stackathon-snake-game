@@ -1,17 +1,21 @@
+// Import modules
 import React, { useRef, useEffect, useContext } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { Vector3 } from 'three';
-import useControls from '../hooks/useControls';
+
+// Import components & custom hooks
 import { GameContext } from './GameManager';
+import useControls from '../hooks/useControls';
 
 export default function Player({ position, args, color }) {
+  const { addToSnake } = useContext(GameContext);
   const player = useRef();
   const { moveLeft, moveRight } = useControls();
   const moveSpeed = 2;
   const turnSpeed = 5;
-  const { addToSnake } = useContext(GameContext);
 
   useEffect(() => {
+    console.log('add player');
     addToSnake(player);
   }, []);
 
