@@ -6,7 +6,8 @@ import { /* softShadows, */ OrbitControls } from '@react-three/drei';
 import './App.css';
 import Floor from './components/Floor';
 import Player from './components/Player';
-import Follower from './components/Follower';
+// import Follower from './components/Follower';
+import FollowerManager from './components/FollowerManager';
 
 // softShadows();
 
@@ -36,8 +37,9 @@ function App() {
         <pointLight position={[0, -10, 0]} intensity={1.5} />
         <Floor position={[0, -1, 0]} />
         <Player position={[0, 0, 0]} color="lightblue" args={[1, 1, 1]} />
-        <Follower position={[-2, 0, 0]} />
-        <Follower position={[-4, 0, 0]} />
+        {/* <Follower position={[-2, 0, 0]} />
+        <Follower position={[-4, 0, 0]} /> */}
+        <FollowerManager />
       </Canvas>
     </div>
   );

@@ -4,7 +4,7 @@ import { GameContext } from './GameManager';
 
 export default function Follower({ position }) {
   const follower = useRef();
-  const { snake } = useContext(GameContext);
+  const { snake /* , addBox  */ } = useContext(GameContext);
   const targetHistory = [];
   let collected = false;
   let reachedLast = false;
@@ -21,6 +21,8 @@ export default function Follower({ position }) {
         snake.push(follower);
         snakeIdx = snake.length - 1;
         console.log('collected!', snake);
+        // addBox();
+        // console.log('add new box');
       }
     } else {
       const target = snake[snakeIdx - 1];
