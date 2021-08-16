@@ -29,6 +29,24 @@
   opacity: 0.6;
 }
 
+#mobile-joystick-right,
+#mobile-joystick-left {
+  position: absolute;
+  bottom: 20px;
+  width: 15%;
+  max-width: 200px;
+  min-width: 50px;
+  opacity: 0.6;
+}
+
+#mobile-joystick-right {
+  right: 20px;
+}
+
+#mobile-joystick-left {
+  left: 20px;
+}
+
 #game-start-ui,
 #game-over-ui {
   display: flex;

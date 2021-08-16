@@ -2,13 +2,35 @@
 import React from 'react';
 
 export default function GameUI() {
+  const checkMobile = function () {
+    const match = window.matchMedia('(pointer:coarse)');
+    return match && match.matches;
+  };
+  // const isMobile = checkMobile();
+  const isMobile = true;
+
   return (
     <div id="game-ui">
-      <img
-        id="game-controls-img"
-        src="/game-controls-icons.png"
-        alt="game controls"
-      />
+      {isMobile ? (
+        <div>
+          <img
+            id="mobile-joystick-right"
+            src="/mobile-joystick.png"
+            alt="right mobile joystick"
+          />
+          <img
+            id="mobile-joystick-left"
+            src="/mobile-joystick.png"
+            alt="left mobile joystick"
+          />
+        </div>
+      ) : (
+        <img
+          id="game-controls-img"
+          src="/game-controls-icons.png"
+          alt="game controls"
+        />
+      )}
       <div id="game-start-ui">
         <h5 id="game-welcome-title">WELCOME TO</h5>
         <h1 id="game-start-title">SNAKE? GAME</h1>

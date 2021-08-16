@@ -35,12 +35,53 @@ export default function usePlayerControls() {
       }
     };
 
+    const handleJoystickRightDown = (e) => {
+      setMovement({
+        ...movement,
+        moveRight: true,
+      });
+    };
+
+    const handleJoystickLeftDown = (e) => {
+      setMovement({
+        ...movement,
+        moveLeft: true,
+      });
+    };
+
+    const handleJoystickRightUp = (e) => {
+      setMovement({
+        ...movement,
+        moveRight: false,
+      });
+    };
+
+    const handleJoystickLeftUp = (e) => {
+      setMovement({
+        ...movement,
+        moveLeft: false,
+      });
+    };
+
+    // PC controls
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('keyup', handleKeyUp);
+
+    // mobile controls
+    const rightJoystick = document.querySelector('#mobile-joystick-right');
+    const leftJoystick = document.querySelector('#mobile-joystick-left');
+    rightJoystick.addEventListener('pointerdown', handleJoystickRightDown);
+    rightJoystick.addEventListener('pointerup', handleJoystickRightUp);
+    leftJoystick.addEventListener('pointerdown', handleJoystickLeftDown);
+    leftJoystick.addEventListener('pointerup', handleJoystickLeftUp);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
+      rightJoystick.removeEventListener('pointerdown', handleJoystickRightDown);
+      rightJoystick.removeEventListener('pointerup', handleJoystickRightUp);
+      leftJoystick.removeEventListener('pointerdown', handleJoystickLeftDown);
+      leftJoystick.removeEventListener('pointerup', handleJoystickLeftUp);
     };
   });
 
