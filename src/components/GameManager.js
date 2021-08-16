@@ -4,8 +4,9 @@ import React, { useState } from 'react';
 export const GameContext = React.createContext();
 
 const initialGameState = {
+  floorSize: 50,
   snake: [],
-  boxes: [{ id: 1, position: [1, 0, 3] }],
+  boxes: [],
 };
 
 export default function GameManager({ children }) {
@@ -16,12 +17,13 @@ export default function GameManager({ children }) {
   }
 
   function addNewBox() {
+    const range = gameState.floorSize / 2;
     const newBox = {
       id: gameState.boxes.length + 1,
       position: [
-        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * range) * 2 - range,
         0,
-        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * range) * 2 - range,
       ],
     };
     setGameState({ ...gameState, boxes: [...gameState.boxes, newBox] });
@@ -30,8 +32,7 @@ export default function GameManager({ children }) {
   return (
     <GameContext.Provider
       value={{
-        snake: gameState.snake,
-        boxes: gameState.boxes,
+        ...gameState,
         addToSnake,
         addNewBox,
       }}

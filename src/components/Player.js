@@ -8,7 +8,7 @@ import { GameContext } from './GameManager';
 import useControls from '../hooks/useControls';
 
 export default function Player({ position, args, color }) {
-  const { addToSnake } = useContext(GameContext);
+  const { addToSnake, addNewBox } = useContext(GameContext);
   const player = useRef();
   const { moveLeft, moveRight } = useControls();
   const moveSpeed = 2;
@@ -17,6 +17,8 @@ export default function Player({ position, args, color }) {
   useEffect(() => {
     console.log('add player');
     addToSnake(player);
+    console.log('add first box');
+    addNewBox();
   }, []);
 
   useFrame((state, delta) => {
