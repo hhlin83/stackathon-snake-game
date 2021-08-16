@@ -1,27 +1,19 @@
-// Import modules
+// Import modules & custom hooks
 import React, { useState } from 'react';
+import useGameControls from '../hooks/useGameControls';
 
 export const GameContext = React.createContext();
 
 const initialGameState = {
   floorSize: 20,
   gameSpeed: 2,
-  gameStarted: false,
-  gameEnded: false,
   snake: [],
   boxes: [],
 };
 
 export default function GameManager({ children }) {
   const [gameState, setGameState] = useState(initialGameState);
-
-  function startGame() {
-    setGameState({ ...gameState, gameStarted: true });
-  }
-
-  function endGame() {
-    setGameState({ ...gameState, gameEnded: true });
-  }
+  const gameControls = useGameControls();
 
   function addToSnake(box) {
     gameState.snake.push(box);
@@ -43,8 +35,7 @@ export default function GameManager({ children }) {
   function resetGame() {
     setGameState({
       floorSize: 50,
-      gameStart: false,
-      gameEnd: false,
+      gameSpeed: 2,
       snake: [],
       boxes: [],
     });
@@ -54,8 +45,7 @@ export default function GameManager({ children }) {
     <GameContext.Provider
       value={{
         ...gameState,
-        startGame,
-        endGame,
+        ...gameControls,
         addToSnake,
         addNewBox,
         resetGame,

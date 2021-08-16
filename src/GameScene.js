@@ -1,20 +1,21 @@
 // Import modules
 import { Canvas } from '@react-three/fiber';
-import { /* softShadows, */ OrbitControls } from '@react-three/drei';
-import './App.css';
+import { OrbitControls } from '@react-three/drei';
+import './GameScene.css';
 
 // Import components
+import GameUI from './components/GameUI';
 import GameManager from './components/GameManager';
 import Floor from './components/Floor';
 import Player from './components/Player';
 import Followers from './components/Followers';
 
-// softShadows();
-
-export default function App() {
+export default function GameScene() {
   return (
-    <div id="canvas-container">
+    <div id="game-scene">
+      <GameUI />
       <Canvas
+        style={{ position: 'absolute' }}
         colorManagement
         shadows
         camera={{ position: [-5, 10, 10], fov: 60 }}
@@ -26,8 +27,6 @@ export default function App() {
             castShadow
             position={[0, 10, 0]}
             intensity={1.5}
-            // shadow-mapSize-width={1024}
-            // shadow-mapSize-height={1024}
             shadow-camera-far={500}
             shadow-camera-left={-50}
             shadow-camera-right={50}

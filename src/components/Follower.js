@@ -8,7 +8,7 @@ import { GameContext } from './GameManager';
 export default function Follower({ position }) {
   const { snake, addToSnake, addNewBox } = useContext(GameContext);
   const follower = useRef();
-  const [targetHistory, setTargetHistory] = useState([]);
+  const [targetHistory] = useState([]);
   const [collected, setCollected] = useState(false);
   const [reachedLast, setReachLast] = useState(false);
   const [startFollow, setStartFollow] = useState(false);
