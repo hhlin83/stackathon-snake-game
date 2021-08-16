@@ -37,6 +37,14 @@
   max-width: 200px;
   min-width: 50px;
   opacity: 0.6;
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+#mobile-joystick-right > img,
+#mobile-joystick-left > img {
+  width: 100%;
 }
 
 #mobile-joystick-right {

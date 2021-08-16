@@ -13,16 +13,12 @@ export default function GameUI() {
     <div id="game-ui">
       {isMobile ? (
         <div>
-          <img
-            id="mobile-joystick-right"
-            src="/mobile-joystick.png"
-            alt="right mobile joystick"
-          />
-          <img
-            id="mobile-joystick-left"
-            src="/mobile-joystick.png"
-            alt="left mobile joystick"
-          />
+          <button id="mobile-joystick-right" type="button">
+            <img src="/mobile-joystick.png" alt="right mobile joystick" />
+          </button>
+          <button id="mobile-joystick-left" type="button">
+            <img src="/mobile-joystick.png" alt="left mobile joystick" />
+          </button>
         </div>
       ) : (
         <img
