@@ -31,14 +31,16 @@
 
 #mobile-joystick-right,
 #mobile-joystick-left {
+  background: url('./assets/mobile-joystick.png') no-repeat;
   position: absolute;
+  background-size: 100%;
   bottom: 20px;
-  width: 15%;
-  max-width: 200px;
-  min-width: 50px;
+  width: 20vh;
+  height: 20vh;
+  max-height: 20vw;
+  max-width: 20vw;
   opacity: 0.6;
   border: 0;
-  background-color: transparent;
   padding: 0;
 }
 

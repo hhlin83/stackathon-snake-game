@@ -7,18 +7,13 @@ export default function GameUI() {
     return match && match.matches;
   };
   const isMobile = checkMobile();
-  // const isMobile = true;
 
   return (
     <div id="game-ui">
       {isMobile ? (
         <div>
-          <button id="mobile-joystick-right" type="button">
-            <img src="/mobile-joystick.png" alt="right mobile joystick" />
-          </button>
-          <button id="mobile-joystick-left" type="button">
-            <img src="/mobile-joystick.png" alt="left mobile joystick" />
-          </button>
+          <button id="mobile-joystick-right" type="button"></button>
+          <button id="mobile-joystick-left" type="button"></button>
         </div>
       ) : (
         <img
