@@ -9,6 +9,7 @@ const initialGameState = {
   gameSpeed: 2,
   snake: [],
   boxes: [],
+  gameOver: false,
 };
 
 export default function GameManager({ children }) {
@@ -32,6 +33,10 @@ export default function GameManager({ children }) {
     setGameState({ ...gameState, boxes: [...gameState.boxes, newBox] });
   }
 
+  function endGame() {
+    setGameState({ ...gameState, gameOver: true });
+  }
+
   function resetGame() {
     setGameState({
       floorSize: 50,
@@ -48,6 +53,7 @@ export default function GameManager({ children }) {
         ...gameControls,
         addToSnake,
         addNewBox,
+        endGame,
         resetGame,
       }}
     >

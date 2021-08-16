@@ -8,6 +8,7 @@ export default function useGameControls() {
 
   useEffect(() => {
     const handleStart = (e) => {
+      startButton.style.display = 'none';
       setGameState({ gameStarted: true });
     };
 

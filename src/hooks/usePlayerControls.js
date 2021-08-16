@@ -10,7 +10,7 @@ function keyActions(key) {
   return keys[key];
 }
 
-export default function useControls() {
+export default function usePlayerControls() {
   const [movement, setMovement] = useState({
     moveLeft: false,
     moveRight: false,

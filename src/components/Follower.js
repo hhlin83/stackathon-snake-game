@@ -6,7 +6,8 @@ import { useFrame } from '@react-three/fiber';
 import { GameContext } from './GameManager';
 
 export default function Follower({ position }) {
-  const { snake, addToSnake, addNewBox } = useContext(GameContext);
+  const { snake, addToSnake, addNewBox, gameOver, floorSize } =
+    useContext(GameContext);
   const follower = useRef();
   const [targetHistory] = useState([]);
   const [collected, setCollected] = useState(false);
@@ -49,13 +50,24 @@ export default function Follower({ position }) {
           follower.current.lookAt(targetPos);
           const distance = followerPos.distanceTo(targetPos);
           if (distance > 1) {
-            console.log('start tracking!', targetHistory);
+            console.log('start tracking!');
             setStartFollow(true);
           }
         } else {
           const historyPos = targetHistory.shift();
-          follower.current.lookAt(historyPos);
-          followerPos.copy(historyPos);
+          const followerX = Math.abs(follower.current.position.x);
+          const followerZ = Math.abs(follower.current.position.z);
+          const range = floorSize / 2;
+          if (
+            !gameOver ||
+            (gameOver && followerX < range && followerZ < range)
+          ) {
+            follower.current.lookAt(historyPos);
+            followerPos.copy(historyPos);
+          } else {
+            follower.current.rotation.copy(target.current.rotation.clone());
+            followerPos.copy(historyPos);
+          }
         }
       }
     }
