@@ -16,7 +16,6 @@ export default function Player({ position, args, color }) {
     floorSize,
     gameOver,
     endGame,
-    boxes,
   } = useContext(GameContext);
   const player = useRef();
   const { moveLeft, moveRight } = usePlayerControls();
