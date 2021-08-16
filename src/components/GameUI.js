@@ -6,8 +6,8 @@ export default function GameUI() {
     const match = window.matchMedia('(pointer:coarse)');
     return match && match.matches;
   };
-  // const isMobile = checkMobile();
-  const isMobile = true;
+  const isMobile = checkMobile();
+  // const isMobile = true;
 
   return (
     <div id="game-ui">
