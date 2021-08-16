@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import { GameContext } from './GameManager';
 
 export default function Follower({ position }) {
-  const { snake, addToSnake, addNewBox, gameOver, floorSize } =
+  const { snake, addToSnake, addNewBox, gameOver, floorSize, endGame } =
     useContext(GameContext);
   const follower = useRef();
   const [targetHistory] = useState([]);
@@ -16,27 +16,23 @@ export default function Follower({ position }) {
   const [boxIdx, setBoxIdx] = useState(null);
   const [boxColor, setBoxColor] = useState('pink');
 
-  if (boxIdx === 1) {
-    console.log('rendered!');
-  }
-
   useFrame(() => {
     const followerPos = follower.current.position;
+
+    // wait for player to collect
     if (!collected && snake[0]) {
       const playerPos = snake[0].current.position.clone();
       const distance = followerPos.distanceTo(playerPos);
       follower.current.lookAt(playerPos);
       if (distance < 0.5) {
         addToSnake(follower);
-        console.log('add to snake!', snake);
         addNewBox();
-        console.log('add new box!', snake);
         setBoxIdx(snake.length - 1);
         setCollected(true);
         setBoxColor('lightblue');
-        console.log('collected!', snake);
       }
     } else {
+      // wait till end of snake after collected
       const target = snake[boxIdx - 1];
       const targetPos = target.current.position.clone();
       follower.current.lookAt(targetPos);
@@ -44,19 +40,28 @@ export default function Follower({ position }) {
         const distance = followerPos.distanceTo(targetPos);
         if (distance < 0.5) {
           setReachLast(true);
-          console.log('reach last!');
         }
       } else {
+        // join line at certain distance from end of snake
         targetHistory.push(targetPos);
         if (!startFollow) {
           follower.current.lookAt(targetPos);
           const distance = followerPos.distanceTo(targetPos);
           if (distance > 1) {
-            console.log('start tracking!');
             setStartFollow(true);
           }
         } else {
+          // start following snake path
           const historyPos = targetHistory.shift();
+
+          // game over if player touches box again
+          const playerPos = snake[0].current.position.clone();
+          const playerDistance = followerPos.distanceTo(playerPos);
+          if (!gameOver && playerDistance < 0.5) {
+            endGame();
+          }
+
+          // check if box is out of floor range
           const followerX = Math.abs(follower.current.position.x);
           const followerZ = Math.abs(follower.current.position.z);
           const range = floorSize / 2;
@@ -64,9 +69,11 @@ export default function Follower({ position }) {
             !gameOver ||
             (gameOver && followerX < range && followerZ < range)
           ) {
+            // keep following snake path
             follower.current.lookAt(historyPos);
             followerPos.copy(historyPos);
           } else {
+            // fall with the player when box out of floor range
             follower.current.rotation.copy(target.current.rotation.clone());
             followerPos.copy(historyPos);
           }

@@ -45,8 +45,15 @@ export default function Player({ position, args, color }) {
         endGame();
       }
     } else if (gameOver) {
-      player.current.rotateOnAxis(new Vector3(1, 0, 0), 10 * delta);
-      player.current.position.y -= gameSpeed * delta;
+      const playerX = Math.abs(player.current.position.x);
+      const playerZ = Math.abs(player.current.position.z);
+      const range = floorSize / 2;
+
+      // only fall if player is out of floor range
+      if (playerX > range || playerZ > range) {
+        player.current.rotateOnAxis(new Vector3(1, 0, 0), 10 * delta);
+        player.current.position.y -= gameSpeed * delta;
+      }
     }
   });
 
