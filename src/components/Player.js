@@ -8,24 +8,30 @@ import { GameContext } from './GameManager';
 import useControls from '../hooks/useControls';
 
 export default function Player({ position, args, color }) {
-  const { addToSnake, addNewBox } = useContext(GameContext);
+  const { gameStarted, gameSpeed, addToSnake, addNewBox } =
+    useContext(GameContext);
   const player = useRef();
   const { moveLeft, moveRight } = useControls();
-  const moveSpeed = 2;
   const turnSpeed = 5;
 
   useEffect(() => {
-    console.log('add player');
-    addToSnake(player);
-    console.log('add first box');
-    addNewBox();
-  }, []);
+    if (gameStarted) {
+      console.log('add player');
+      addToSnake(player);
+      console.log('add first box');
+      addNewBox();
+    }
+  }, [gameStarted]);
 
   useFrame((state, delta) => {
-    const direction = (moveLeft ? 1 : 0) + (moveRight ? -1 : 0);
-    player.current.rotation.y += turnSpeed * direction * delta;
-    player.current.translateOnAxis(new Vector3(0, 0, 1), moveSpeed * delta);
+    if (gameStarted) {
+      const direction = (moveLeft ? 1 : 0) + (moveRight ? -1 : 0);
+      player.current.rotation.y += turnSpeed * direction * delta;
+      player.current.translateOnAxis(new Vector3(0, 0, 1), gameSpeed * delta);
+    }
   });
+
+  if (!gameStarted) return null;
 
   return (
     <mesh castShadow position={position} ref={player}>
