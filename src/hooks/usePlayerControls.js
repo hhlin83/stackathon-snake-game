@@ -70,18 +70,26 @@ export default function usePlayerControls() {
     // mobile controls
     const rightJoystick = document.querySelector('#mobile-joystick-right');
     const leftJoystick = document.querySelector('#mobile-joystick-left');
-    rightJoystick.addEventListener('pointerdown', handleJoystickRightDown);
-    rightJoystick.addEventListener('pointerup', handleJoystickRightUp);
-    leftJoystick.addEventListener('pointerdown', handleJoystickLeftDown);
-    leftJoystick.addEventListener('pointerup', handleJoystickLeftUp);
+    if (rightJoystick && leftJoystick) {
+      rightJoystick.addEventListener('pointerdown', handleJoystickRightDown);
+      rightJoystick.addEventListener('pointerup', handleJoystickRightUp);
+      leftJoystick.addEventListener('pointerdown', handleJoystickLeftDown);
+      leftJoystick.addEventListener('pointerup', handleJoystickLeftUp);
+    }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
-      rightJoystick.removeEventListener('pointerdown', handleJoystickRightDown);
-      rightJoystick.removeEventListener('pointerup', handleJoystickRightUp);
-      leftJoystick.removeEventListener('pointerdown', handleJoystickLeftDown);
-      leftJoystick.removeEventListener('pointerup', handleJoystickLeftUp);
+
+      if (rightJoystick && leftJoystick) {
+        rightJoystick.removeEventListener(
+          'pointerdown',
+          handleJoystickRightDown
+        );
+        rightJoystick.removeEventListener('pointerup', handleJoystickRightUp);
+        leftJoystick.removeEventListener('pointerdown', handleJoystickLeftDown);
+        leftJoystick.removeEventListener('pointerup', handleJoystickLeftUp);
+      }
     };
   });
 
