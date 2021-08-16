@@ -33,6 +33,11 @@ export default function GameManager({ children }) {
     setGameState({ ...gameState, boxes: [...gameState.boxes, newBox] });
   }
 
+  function addGameSpeed() {
+    const newSpeed = gameState.gameSpeed + 0.2;
+    setGameState({ ...gameState, gameSpeed: newSpeed });
+  }
+
   function endGame() {
     setGameState({ ...gameState, gameOver: true });
     const gameOverTitle = document.querySelector('#game-over-ui');
@@ -55,6 +60,7 @@ export default function GameManager({ children }) {
         ...gameControls,
         addToSnake,
         addNewBox,
+        addGameSpeed,
         endGame,
         resetGame,
       }}

@@ -16,16 +16,15 @@ export default function Player({ position, args, color }) {
     floorSize,
     gameOver,
     endGame,
+    boxes,
   } = useContext(GameContext);
   const player = useRef();
   const { moveLeft, moveRight } = usePlayerControls();
-  const turnSpeed = 5;
+  const turnSpeed = 3;
 
   useEffect(() => {
     if (gameStarted) {
-      console.log('add player');
       addToSnake(player);
-      console.log('add first box');
       addNewBox();
     }
   }, [gameStarted]);
@@ -41,7 +40,6 @@ export default function Player({ position, args, color }) {
       const playerZ = Math.abs(player.current.position.z);
       const range = floorSize / 2;
       if (playerX > range || playerZ > range) {
-        console.log('game over!');
         endGame();
       }
     } else if (gameOver) {

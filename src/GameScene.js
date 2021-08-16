@@ -18,7 +18,7 @@ export default function GameScene() {
         style={{ position: 'absolute' }}
         colorManagement
         shadows
-        camera={{ position: [0, 10, 10], fov: 60 }}
+        camera={{ position: [0, 13, 16], fov: 60 }}
       >
         <GameManager>
           <OrbitControls />
