@@ -35,6 +35,8 @@ export default function GameManager({ children }) {
 
   function endGame() {
     setGameState({ ...gameState, gameOver: true });
+    const gameOverTitle = document.querySelector('#game-over-ui');
+    gameOverTitle.style.display = 'flex';
   }
 
   function resetGame() {

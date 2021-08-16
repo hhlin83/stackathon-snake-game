@@ -5,13 +5,40 @@
   align-items: center;
 }
 
+#game-canvas {
+  position: absolute;
+}
+
 #game-ui {
   z-index: 100;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  width: 50%;
+  margin: auto;
 }
 
-#game-canvas {
-  position: absolute;
+#game-start-ui,
+#game-over-ui {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
+
+#game-welcome-title {
+  margin: 0;
+  color: blanchedalmond;
+  text-shadow: 2px 2px cadetblue;
+}
+
+#game-start-title,
+#game-over-title {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: blanchedalmond;
+  text-shadow: 2px 2px cadetblue;
 }
