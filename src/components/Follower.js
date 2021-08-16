@@ -14,6 +14,7 @@ export default function Follower({ position }) {
   const [reachedLast, setReachLast] = useState(false);
   const [startFollow, setStartFollow] = useState(false);
   const [boxIdx, setBoxIdx] = useState(null);
+  const [boxColor, setBoxColor] = useState('pink');
 
   if (boxIdx === 1) {
     console.log('rendered!');
@@ -32,6 +33,7 @@ export default function Follower({ position }) {
         console.log('add new box!', snake);
         setBoxIdx(snake.length - 1);
         setCollected(true);
+        setBoxColor('lightblue');
         console.log('collected!', snake);
       }
     } else {
@@ -76,7 +78,7 @@ export default function Follower({ position }) {
   return (
     <mesh castShadow position={position} ref={follower}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="pink" />
+      <meshStandardMaterial color={boxColor} />
     </mesh>
   );
 }
