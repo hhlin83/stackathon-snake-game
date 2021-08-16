@@ -4,6 +4,11 @@ import React from 'react';
 export default function GameUI() {
   return (
     <div id="game-ui">
+      <img
+        id="game-controls-img"
+        src="/game-controls-icons.png"
+        alt="game controls"
+      />
       <div id="game-start-ui">
         <h5 id="game-welcome-title">WELCOME TO</h5>
         <h1 id="game-start-title">SNAKE? GAME</h1>

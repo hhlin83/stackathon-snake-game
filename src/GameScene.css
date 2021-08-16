@@ -19,6 +19,16 @@
   margin: auto;
 }
 
+#game-controls-img {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 20%;
+  max-width: 200px;
+  min-width: 150px;
+  opacity: 0.6;
+}
+
 #game-start-ui,
 #game-over-ui {
   display: flex;
