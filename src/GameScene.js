@@ -15,6 +15,7 @@ export default function GameScene() {
     <div id="game-scene">
       <GameUI />
       <Canvas
+        id="game-area"
         style={{ position: 'absolute' }}
         colorManagement
         shadows
