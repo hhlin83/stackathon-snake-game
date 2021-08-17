@@ -17,6 +17,10 @@
   align-items: center;
   width: 50%;
   margin: auto;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 #game-controls-img {
